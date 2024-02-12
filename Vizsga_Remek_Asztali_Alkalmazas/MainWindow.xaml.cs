@@ -20,5 +20,20 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         {
             InitializeComponent();
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

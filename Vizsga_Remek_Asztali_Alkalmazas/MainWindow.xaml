@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vizsga_Remek_Asztali_Alkalmazas"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1400"
+        WindowState="Maximized"
+        WindowStyle="None">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" x:Name="Belepes" Visibility="Collapsed">
+            
+        </Grid>
+        <Grid Visibility="Visible" Grid.Row="1">
+           
 
+            <DataGrid x:Name="peopleTable" d:ItemsSource="{d:SampleData ItemCount=5}" IsReadOnly="True" />
+        </Grid>
+        <Menu>
+            <MenuItem Header="Profile" Height="50">
+                <MenuItem Header="Bejelentkezés"/>
+                <MenuItem Header="Kijelentkezés"/>
+                <MenuItem Header="Regisztráció"/>
+            </MenuItem>
+            <MenuItem Header="Adatok">
+                <MenuItem Header="Tőrlés"/>
+                <MenuItem Header="Hozzáadás"/>
+                <MenuItem Header="Modositása"/>
+            </MenuItem>
+            <MenuItem Header="X" Width="30" Background="Red" HorizontalAlignment="Right"/>
+        </Menu>
     </Grid>
 </Window>
+<!--<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Height="50">
+    <Button Content="Hozzáad" Width="100" Click="Add_Click"/>
+    <Button Content="Módosít" Width="100" Click="Update_Click"/>
+    <Button Content="Törlés" Width="100" Click="Delete_Click" />
+</StackPanel>-->
