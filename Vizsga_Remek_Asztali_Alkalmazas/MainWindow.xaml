@@ -5,6 +5,9 @@
         Height="720" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
         Background="Transparent" >
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
     <Border Background="#eff2f7" CornerRadius="30" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_LeftMouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -18,7 +21,7 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Button Margin="20,28,0,35" Style="{StaticResource topButton}">
+                <Button Margin="20,28,0,35" Style="{StaticResource topButton}" HorizontalAlignment="Left">
                     <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
                 </Button>
 
@@ -64,6 +67,26 @@
                         </Button>
                     </DockPanel>
                 </Border> 
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="30 20 20 20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Width="300" HorizontalAlignment="Left">
+                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Keresés" />
+                    <TextBox x:Name="Search" Style="{StaticResource textboxSeartch}" Height="30"/>
+                    <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
+                </Grid>
+
+
             </Grid>
         </Grid>
     </Border>
