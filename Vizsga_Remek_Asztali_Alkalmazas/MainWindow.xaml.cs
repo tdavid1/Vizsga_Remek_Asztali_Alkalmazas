@@ -5,6 +5,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -21,19 +22,33 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             InitializeComponent();
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
 
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
         }
-
-        private void Update_Click(object sender, RoutedEventArgs e)
+        private bool Maximum = false;
+        private void Border_LeftMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(e.ClickCount == 2)
+            {
+                if (Maximum)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.Height = 720;
+                    this.Width = 1080;
 
-        }
-
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-
+                    Maximum = false;
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+                    Maximum = true;
+                }
+            }
         }
     }
 }
