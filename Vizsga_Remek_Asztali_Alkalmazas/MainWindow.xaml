@@ -14,7 +14,7 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
+            <!--Oldalsáv-->
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -68,7 +68,7 @@
                     </DockPanel>
                 </Border> 
             </Grid>
-
+            <!--Fő Tábla-->
             <Grid Grid.Column="1" Margin="30 20 20 20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -79,14 +79,26 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-
+                <!--Kereső-->
                 <Grid Width="300" HorizontalAlignment="Left">
                     <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Keresés" />
                     <TextBox x:Name="Search" Style="{StaticResource textboxSeartch}" Height="30"/>
                     <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
                 </Grid>
-
-
+                <!--Beálitás-->
+                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
+                    <Icon:PackIconMaterial Kind="Cog"/>
+                </Button>
+                <!--Oldal Cím-->
+                <TextBlock Text="Termékek" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518"/>
+                <!--Hozzáadás Gomb-->
+                <Button Style="{StaticResource addButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
+                        <TextBlock Text="Új Termék Felvétele"/>
+                    </StackPanel>
+                </Button>
+                
             </Grid>
         </Grid>
     </Border>
