@@ -35,13 +35,33 @@
                         <TextBlock Text="Admin" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" />
                         <Separator Margin="25" DockPanel.Dock="Top" Height="2.8" Background="#3361DC"/>
                         <StackPanel DockPanel.Dock="Top">
-                            <Button>
+                            <Button Style="{StaticResource menuButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial/>
+                                    <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuIcon}"/>
                                     <TextBlock Text="Fő Oldal"/>
                                 </StackPanel>
                             </Button>
+
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="Login" Style="{StaticResource menuIcon}"/>
+                                    <TextBlock Text="Bejelentkezés"/>
+                                </StackPanel>
+                            </Button>
+
+                            <Button Style="{StaticResource menuButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial Kind="RegisteredTrademark" Style="{StaticResource menuIcon}"/>
+                                    <TextBlock Text="Regisztráció"/>
+                                </StackPanel>
+                            </Button>
                         </StackPanel>
+                        <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                            <StackPanel Orientation="Horizontal">
+                                <Icon:PackIconMaterial Kind="Logout" Style="{StaticResource menuIcon}"/>
+                                <TextBlock Text="Kijelentkezés"/>
+                            </StackPanel>
+                        </Button>
                     </DockPanel>
                 </Border> 
             </Grid>
