@@ -21,6 +21,29 @@
                 <Button Margin="20,28,0,35" Style="{StaticResource topButton}">
                     <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
                 </Button>
+
+                <Border Grid.Row="1" Background="#0B3ABC" CornerRadius="0 50 0 30">
+                    <DockPanel>
+                        <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/Profile.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+                        <TextBlock Text="Webshop" Foreground="White" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" Margin="5 25 0 10"/>
+                        <TextBlock Text="Admin" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" />
+                        <Separator Margin="25" DockPanel.Dock="Top" Height="2.8" Background="#3361DC"/>
+                        <StackPanel DockPanel.Dock="Top">
+                            <Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <Icon:PackIconMaterial/>
+                                    <TextBlock Text="Fő Oldal"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </DockPanel>
+                </Border> 
             </Grid>
         </Grid>
     </Border>
