@@ -113,8 +113,44 @@
                     <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
                 </Grid>
                 <!--Termék/Fiók Táblázat-->
-                <DataGrid>
-                    
+                <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="produtcTable">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto"/>
+                        <DataGridTemplateColumn Header="Termék Neve" IsReadOnly="True" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="Red">
+                                            <TextBlock Text="..." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                        </Border>
+                                        <TextBlock Text="..." VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTextColumn Header="Kép" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Ára" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Leirása" IsReadOnly="True" Width="*"/>
+                        
+                        <DataGridTemplateColumn Header="Gombok" IsReadOnly="True" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource tableeditButton}">
+                                            <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource tableButtonIcon}"/>
+                                        </Button>
+                                        <Button Style="{StaticResource tabledeleteButton}">
+                                            <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource tableButtonIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+
+                    </DataGrid.Columns>
                 </DataGrid>
                 <!--Oldalválasztó alsó sáv-->
                 <Border Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1" CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10">
