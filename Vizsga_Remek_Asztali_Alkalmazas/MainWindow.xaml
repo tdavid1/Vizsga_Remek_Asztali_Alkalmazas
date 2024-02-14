@@ -104,6 +104,14 @@
                     <Button Content="Termékek" Style="{StaticResource tabButton}" BorderBrush="#0B3ABC"/>
                     <Button Content="Fiokok" Style="{StaticResource tabButton}"/>
                 </StackPanel>
+                <!--Termék/Fiok Számlákó-->
+                <TextBlock Text="- Termék van" Grid.Row="4" FontSize="19" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Text="Keresés a listába" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Foreground="#121518" Margin="0 0 215 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
+                    <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Kereset Termék" />
+                    <TextBox x:Name="Search_list" Style="{StaticResource textboxSeartchtermek}" Height="30"/>
+                    <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
+                </Grid>
             </Grid>
         </Grid>
     </Border>
