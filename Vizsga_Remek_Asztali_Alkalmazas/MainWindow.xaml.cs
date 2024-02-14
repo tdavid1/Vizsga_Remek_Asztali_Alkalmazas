@@ -20,6 +20,9 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         public MainWindow()
         {
             InitializeComponent();
+            List<Products> products = new List<Products>();
+            products.Add(new Products(1, "1090", "igen", 1000, "egy jó videokártya"));
+            produtcTable.ItemsSource = products;
         }
 
 

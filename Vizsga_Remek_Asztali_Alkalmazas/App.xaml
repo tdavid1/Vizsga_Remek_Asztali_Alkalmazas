@@ -403,18 +403,18 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="#0B3ABC"/>
-                    <Setter Property="Foreground" Value="#ffffff"/>
+                    <Setter Property="Foreground" Value="#0B3ABC"/>
                 </Trigger>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="BorderBrush" Value="#0B3ABC"/>
-                    <Setter Property="Foreground" Value="#ffffff"/>
+                    <Setter Property="Foreground" Value="#0B3ABC"/>
                 </Trigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsSelected" Value="True"/>
                         <Condition Property="Selector.IsSelectionActive" Value="False"/>
                     </MultiTrigger.Conditions>
-                    <Setter Property="BorderBrush" Value="#dfdfdf"/>
+                    <Setter Property="BorderBrush" Value="#0B3ABC"/>
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
