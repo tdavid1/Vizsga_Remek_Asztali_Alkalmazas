@@ -53,5 +53,10 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
             }
         }
+
+        private void TextBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
