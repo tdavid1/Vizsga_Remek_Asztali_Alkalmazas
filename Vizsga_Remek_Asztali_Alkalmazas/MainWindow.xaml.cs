@@ -24,8 +24,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             products.Add(new Products(1, "1090", "igen", 1000, "egy jó videokártya"));
             produtcTable.ItemsSource = products;
         }
-
-
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if(e.ChangedButton == MouseButton.Left)
@@ -53,10 +51,31 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
             }
         }
-
-        private void TextBox_PasswordChanged(object sender, RoutedEventArgs e)
+        private bool Logged = false;
+        private void main_page(object sender, RoutedEventArgs e)
         {
+            if (!Logged)
+            {
+                MessageBox.Show("Be kell jelentkezni");
+            }
+            else
+            {
+                Main_page.Visibility = Visibility.Visible;
+                Login_page.Visibility = Visibility.Collapsed;
+            }
+        }
 
+        private void login(object sender, RoutedEventArgs e)
+        {
+            if (!Logged)
+            {
+                Main_page.Visibility = Visibility.Collapsed;
+                Login_page.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Be vagy jelentkezve");
+            }
         }
     }
 }

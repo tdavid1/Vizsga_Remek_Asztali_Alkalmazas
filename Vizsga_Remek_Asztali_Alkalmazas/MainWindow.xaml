@@ -38,24 +38,17 @@
                         <TextBlock Text="Admin" Foreground="#d0bfff" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center" />
                         <Separator Margin="25" DockPanel.Dock="Top" Height="2.8" Background="#3361DC"/>
                         <StackPanel DockPanel.Dock="Top">
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" Click="main_page">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuIcon}"/>
                                     <TextBlock Text="Fő Oldal"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" Click="login">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Login" Style="{StaticResource menuIcon}"/>
                                     <TextBlock Text="Bejelentkezés"/>
-                                </StackPanel>
-                            </Button>
-
-                            <Button Style="{StaticResource menuButton}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Icon:PackIconMaterial Kind="RegisteredTrademark" Style="{StaticResource menuIcon}"/>
-                                    <TextBlock Text="Regisztráció"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -66,16 +59,16 @@
                             </StackPanel>
                         </Button>
                     </DockPanel>
-                </Border> 
+                </Border>
             </Grid>
             <!--Bejelentkezés-->
-            <Grid Grid.Column="1" Visibility="Visible">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="Login_page">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" VerticalAlignment="Center" FontFamily="SemiBold" HorizontalAlignment="Center" Width="350" TextWrapping="Wrap" Text="        Üdvözöljük      Kérem Jelenkezenbe" FontSize="36"/>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" FontFamily="SemiBold" HorizontalAlignment="Center" Width="350" TextWrapping="Wrap" TextAlignment="Center" Text="        Üdvözöljük Kérem Jelenkezenbe" FontSize="36"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -97,7 +90,7 @@
                 </Button>
             </Grid>
             <!--Fő Tábla-->
-            <Grid Grid.Column="1" Margin="30 20 20 20" Visibility="Collapsed">
+            <Grid Grid.Column="1" Margin="30 20 20 20" Visibility="Visible" x:Name="Main_page">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
