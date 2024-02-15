@@ -77,5 +77,17 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 MessageBox.Show("Be vagy jelentkezve");
             }
         }
+
+        private void slide_show(object sender, RoutedEventArgs e)
+        {
+            if (slide.Visibility == Visibility.Visible)
+            {
+                slide.Visibility = Visibility.Collapsed;
+            }
+            else 
+            { 
+                slide.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

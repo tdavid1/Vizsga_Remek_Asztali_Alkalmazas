@@ -21,11 +21,11 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Button Margin="20,28,0,35" Style="{StaticResource topButton}" HorizontalAlignment="Left">
+                <Button Margin="20,28,0,35" Style="{StaticResource topButton}" HorizontalAlignment="Left" Click="slide_show">
                     <Icon:PackIconMaterial Kind="Menu" Width="15" Height="15"/>
                 </Button>
 
-                <Border Grid.Row="1" Background="#0B3ABC" CornerRadius="0 50 0 30">
+                <Border Grid.Row="1" Background="#0B3ABC" CornerRadius="0 50 0 30" x:Name="slide">
                     <DockPanel>
                         <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
                             <Ellipse>
