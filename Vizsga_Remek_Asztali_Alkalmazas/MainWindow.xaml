@@ -111,7 +111,7 @@
                     <Icon:PackIconMaterial Kind="Cog"/>
                 </Button>
                 <!--Oldal Cím-->
-                <TextBlock Text="Termékek" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518"/>
+                <TextBlock x:Name="title" Text="Termékek" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518"/>
                 <!--Hozzáadás Gomb-->
                 <Button Style="{StaticResource addButton}">
                     <StackPanel Orientation="Horizontal">

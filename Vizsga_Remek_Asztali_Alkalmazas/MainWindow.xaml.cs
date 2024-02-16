@@ -17,13 +17,12 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Products> products;
+        ProductsService productsService;
         public MainWindow()
         {
             InitializeComponent();
-            products = new List<Products>();
-            products.Add(new Products(1, "1090", "igen", 1000, "egy jó videokártya"));
-            produtcTable.ItemsSource = products;
+            this.productsService = new ProductsService();
+            products_Read();
         }
         //Oldal nagyitása és kicsinyitése
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -53,7 +52,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
             }
         }
-        //--------------------------------------------
+        //-------------------------------------------------------------
         //Oldalsávok közti mozgás és elrejtése
         private bool Logged = false;
         private void main_page(object sender, RoutedEventArgs e)
@@ -91,7 +90,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 slide.Visibility = Visibility.Visible;
             }
         }
-        //-----------------------------------------------------
+        //-------------------------------------------------------------
         //A táblák közöti mozgás
         private void move_products_table(object sender, RoutedEventArgs e)
         {
@@ -100,7 +99,8 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             costumer_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Visible;
             costumerTable.Visibility = Visibility.Collapsed;
-            counter.Text=products.Count.ToString()+" Termék Van";
+            counter.Text="-"+" Termék Van";
+            title.Text = "Termékek";
         }
 
         private void move_costumer_table(object sender, RoutedEventArgs e)
@@ -111,6 +111,13 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             produtcTable.Visibility = Visibility.Collapsed;
             costumerTable.Visibility = Visibility.Visible;
             counter.Text = "-" + " Felhasználó Van";
+            title.Text = "Felhasználók";
+        }
+        //-------------------------------------------------------------
+        //Táblák Feltöltése
+        private void products_Read()
+        {
+            produtcTable.ItemsSource = productsService.GetAll();
         }
     }
 }
