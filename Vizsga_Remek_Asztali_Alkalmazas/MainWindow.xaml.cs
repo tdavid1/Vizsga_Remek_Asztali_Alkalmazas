@@ -18,11 +18,15 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     public partial class MainWindow : Window
     {
         ProductsService productsService;
+        CostumerService costumerService;
         public MainWindow()
         {
             InitializeComponent();
             this.productsService = new ProductsService();
+            this.costumerService = new CostumerService();
+            counter.Text = productsService.GetAll().Count + " Termék Van";
             products_Read();
+            costumer_Read();
         }
         //Oldal nagyitása és kicsinyitése
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -99,7 +103,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             costumer_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Visible;
             costumerTable.Visibility = Visibility.Collapsed;
-            counter.Text="-"+" Termék Van";
+            counter.Text=productsService.GetAll().Count+" Termék Van";
             title.Text = "Termékek";
         }
 
@@ -110,7 +114,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             products_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Collapsed;
             costumerTable.Visibility = Visibility.Visible;
-            counter.Text = "-" + " Felhasználó Van";
+            counter.Text = costumerService.GetAll().Count + " Felhasználó Van";
             title.Text = "Felhasználók";
         }
         //-------------------------------------------------------------
@@ -118,6 +122,10 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         private void products_Read()
         {
             produtcTable.ItemsSource = productsService.GetAll();
+        }
+        private void costumer_Read()
+        {
+            costumerTable.ItemsSource = costumerService.GetAll();
         }
     }
 }

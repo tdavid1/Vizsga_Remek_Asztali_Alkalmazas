@@ -12,7 +12,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     {
         public int Id { get; set; }
         public string Products_name { get; set; }
-        public Image Picture { get; set; }
         public int Price { get; set; }
         public string Description { get; set; }
     }

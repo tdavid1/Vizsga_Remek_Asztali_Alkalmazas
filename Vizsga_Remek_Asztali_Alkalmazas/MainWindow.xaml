@@ -133,12 +133,11 @@
                     <TextBox x:Name="Search_list" Style="{StaticResource textboxSeartchtermek}" Height="30"/>
                     <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
                 </Grid>
-                <!--Termék/Fiók Táblázat-->
+                <!--Termék Táblázat-->
                 <DataGrid Visibility="Visible" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="produtcTable">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Termék" IsReadOnly="True" Width="*" Binding="{Binding Products_name}"/>
-                        <DataGridTextColumn Header="Kép" IsReadOnly="True" Width="*" Binding="{Binding Picture}"/>
                         <DataGridTextColumn Header="Ára" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
                         <DataGridTextColumn Header="Leirása" IsReadOnly="True" Width="*" Binding="{Binding Description}"/>
                         <DataGridTemplateColumn Header="Gombok" IsReadOnly="True" Width="auto">
@@ -163,7 +162,6 @@
                         <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id_Costumer}"/>
                         <DataGridTextColumn Header="Név" IsReadOnly="True" Width="*" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Email" IsReadOnly="True" Width="*" Binding="{Binding Email}"/>
-                        <DataGridTextColumn Header="Telefonszám" IsReadOnly="True" Width="*" Binding="{Binding Mobile_number}"/>
                         <DataGridTextColumn Header="Jogkőr" IsReadOnly="True" Width="*" Binding="{Binding Privilage}"/>
                         <DataGridTemplateColumn Header="Gombok" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
