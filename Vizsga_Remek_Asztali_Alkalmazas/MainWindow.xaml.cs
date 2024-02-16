@@ -17,13 +17,15 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Products> products;
         public MainWindow()
         {
             InitializeComponent();
-            List<Products> products = new List<Products>();
+            products = new List<Products>();
             products.Add(new Products(1, "1090", "igen", 1000, "egy jó videokártya"));
             produtcTable.ItemsSource = products;
         }
+        //Oldal nagyitása és kicsinyitése
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if(e.ChangedButton == MouseButton.Left)
@@ -51,6 +53,8 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
             }
         }
+        //--------------------------------------------
+        //Oldalsávok közti mozgás és elrejtése
         private bool Logged = false;
         private void main_page(object sender, RoutedEventArgs e)
         {
@@ -64,7 +68,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 Login_page.Visibility = Visibility.Collapsed;
             }
         }
-
         private void login(object sender, RoutedEventArgs e)
         {
             if (!Logged)
@@ -77,7 +80,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 MessageBox.Show("Be vagy jelentkezve");
             }
         }
-
         private void slide_show(object sender, RoutedEventArgs e)
         {
             if (slide.Visibility == Visibility.Visible)
@@ -88,6 +90,27 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             { 
                 slide.Visibility = Visibility.Visible;
             }
+        }
+        //-----------------------------------------------------
+        //A táblák közöti mozgás
+        private void move_products_table(object sender, RoutedEventArgs e)
+        {
+            Brush color= new SolidColorBrush(Color.FromArgb(255, 11, 58, 188));
+            products_button.BorderBrush = color;
+            costumer_button.BorderBrush = Brushes.Transparent;
+            produtcTable.Visibility = Visibility.Visible;
+            costumerTable.Visibility = Visibility.Collapsed;
+            counter.Text=products.Count.ToString()+" Termék Van";
+        }
+
+        private void move_costumer_table(object sender, RoutedEventArgs e)
+        {
+            Brush color = new SolidColorBrush(Color.FromArgb(255, 11, 58, 188));
+            costumer_button.BorderBrush = color;
+            products_button.BorderBrush = Brushes.Transparent;
+            produtcTable.Visibility = Visibility.Collapsed;
+            costumerTable.Visibility = Visibility.Visible;
+            counter.Text = "-" + " Felhasználó Van";
         }
     }
 }
