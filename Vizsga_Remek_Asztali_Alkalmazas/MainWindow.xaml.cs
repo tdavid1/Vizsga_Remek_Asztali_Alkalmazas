@@ -19,13 +19,15 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     {
         ProductsService productsService;
         CostumerService costumerService;
+        int actual_page;
         public MainWindow()
         {
             InitializeComponent();
             this.productsService = new ProductsService();
             this.costumerService = new CostumerService();
+            actual_page = 1;
             counter.Text = productsService.GetAll().Count + " Termék Van";
-            products_Read();
+            products_Read(actual_page);
             costumer_Read();
         }
         //Oldal nagyitása és kicsinyitése
@@ -119,13 +121,76 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         }
         //-------------------------------------------------------------
         //Táblák Feltöltése
-        private void products_Read()
+        private void products_Read(int page_number)
         {
-            produtcTable.ItemsSource = productsService.GetAll();
+            List<Products> list = productsService.GetAll();
+            List<Products> completlist = new List<Products>();
+            int number = page_number * 10;
+            int i = 1;
+            foreach (Products product in list)
+            {
+                if (i > number - 10)
+                {
+                    completlist.Add(product);
+                }
+            }
+            produtcTable.ItemsSource = completlist;
         }
         private void costumer_Read()
         {
             costumerTable.ItemsSource = costumerService.GetAll();
         }
+        //---------------------------------------------------------------
+        //Alsó sáv gombok
+        private void Move_Button(object sender, RoutedEventArgs e)
+        {
+            Brush color = new SolidColorBrush(Color.FromArgb(255, 11, 58, 188));
+            Button button = (sender as Button);
+            string content = button.Content.ToString();
+            int helper = int.Parse(content);
+            if (content == "1")
+            {
+                products_Read(helper);
+                Button_1.Content = "1";
+                Button_1.Background = color;
+                Button_2.Content = "2";
+                Button_2.Background = Brushes.Transparent;
+                Button_3.Content = "3";
+                Button_3.Background = Brushes.Transparent;
+                Button_4.Content = "4";
+                Button_4.Background = Brushes.Transparent;
+                Button_5.Content = "5";
+                Button_5.Background = Brushes.Transparent;
+            }
+            else if (content== "2")
+            {
+                products_Read(helper);
+                Button_1.Content = "1";
+                Button_1.Background = Brushes.Transparent;
+                Button_2.Content = "2";
+                Button_2.Background = color;
+                Button_3.Content = "3";
+                Button_3.Background = Brushes.Transparent;
+                Button_4.Content = "4";
+                Button_4.Background = Brushes.Transparent;
+                Button_5.Content = "5";
+                Button_5.Background = Brushes.Transparent;
+            }
+            else
+            {
+                products_Read(helper);
+                Button_1.Content = (helper-2).ToString();
+                Button_1.Background = Brushes.Transparent;
+                Button_2.Content = (helper -1).ToString();
+                Button_2.Background = Brushes.Transparent;
+                Button_3.Content = content;
+                Button_3.Background = color;
+                Button_4.Content = (helper + 1).ToString();
+                Button_4.Background = Brushes.Transparent;
+                Button_5.Content = (helper + 2).ToString();
+                Button_5.Background = Brushes.Transparent;
+            }
+        }
+        
     }
 }

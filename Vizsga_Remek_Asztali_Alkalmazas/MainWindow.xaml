@@ -183,11 +183,11 @@
                             <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource paginButtonIcon}"/>
                         </Button>
                         <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
-                        <Button Style="{StaticResource paginButton}" Content="1" Background="#0B3ABC"/>
-                        <Button Style="{StaticResource paginButton}" Content="2"/>
-                        <Button Style="{StaticResource paginButton}" Content="3" />
-                        <Button Style="{StaticResource paginButton}" Content="4" />
-                        <Button Style="{StaticResource paginButton}" Content="5" />
+                        <Button Style="{StaticResource paginButton}" Content="1" x:Name="Button_1" Background="#0B3ABC" Click="Move_Button"/>
+                        <Button Style="{StaticResource paginButton}" Content="2" x:Name="Button_2" Click="Move_Button"/>
+                        <Button Style="{StaticResource paginButton}" Content="3" x:Name="Button_3" Click="Move_Button"/>
+                        <Button Style="{StaticResource paginButton}" Content="4" x:Name="Button_4" Click="Move_Button"/>
+                        <Button Style="{StaticResource paginButton}" Content="5" x:Name="Button_5" Click="Move_Button"/>
                         <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
                         <Button Style="{StaticResource paginButton}">
                             <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource paginButtonIcon}"/>
