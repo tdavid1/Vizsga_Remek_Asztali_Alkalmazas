@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Vizsga_Remek_Asztali_Alkalmazas
 {
@@ -17,6 +19,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         ProductsService productsService;
         CostumerService costumerService;
         int actual_page;
@@ -28,7 +31,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             actual_page = 1;
             counter.Text = productsService.GetAll().Count + " Termék Van";
             products_Read(actual_page);
-            costumer_Read();
+            costumer_Read(actual_page);
         }
         //Oldal nagyitása és kicsinyitése
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -100,7 +103,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         //A táblák közöti mozgás
         private void move_products_table(object sender, RoutedEventArgs e)
         {
-            Brush color= new SolidColorBrush(Color.FromArgb(255, 11, 58, 188));
+            Brush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 11, 58, 188));
             products_button.BorderBrush = color;
             costumer_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Visible;
@@ -111,7 +114,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
 
         private void move_costumer_table(object sender, RoutedEventArgs e)
         {
-            Brush color = new SolidColorBrush(Color.FromArgb(255, 11, 58, 188));
+            Brush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 11, 58, 188));
             costumer_button.BorderBrush = color;
             products_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Collapsed;
@@ -136,21 +139,35 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             }
             produtcTable.ItemsSource = completlist;
         }
-        private void costumer_Read()
+        private void costumer_Read(int page_number)
         {
-            costumerTable.ItemsSource = costumerService.GetAll();
+            List<Costumer> list = costumerService.GetAll();
+            List<Costumer> completlist = new List<Costumer>();
+            int number = page_number * 10;
+            int i = 1;
+            foreach (Costumer costumer in list)
+            {
+                if (i > number - 10)
+                {
+                    completlist.Add(costumer);
+                }
+            }
+            costumerTable.ItemsSource = completlist;
         }
         //---------------------------------------------------------------
         //Alsó sáv gombok
         private void Move_Button(object sender, RoutedEventArgs e)
         {
-            Brush color = new SolidColorBrush(Color.FromArgb(255, 11, 58, 188));
+            
+            Brush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 11, 58, 188));
             Button button = (sender as Button);
             string content = button.Content.ToString();
             int helper = int.Parse(content);
             if (content == "1")
             {
+                actual_page = 1;
                 products_Read(helper);
+                costumer_Read(helper);
                 Button_1.Content = "1";
                 Button_1.Background = color;
                 Button_2.Content = "2";
@@ -164,7 +181,9 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             }
             else if (content== "2")
             {
+                actual_page = 2;
                 products_Read(helper);
+                costumer_Read(helper);
                 Button_1.Content = "1";
                 Button_1.Background = Brushes.Transparent;
                 Button_2.Content = "2";
@@ -178,7 +197,9 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             }
             else
             {
+                actual_page = helper;
                 products_Read(helper);
+                costumer_Read(helper);
                 Button_1.Content = (helper-2).ToString();
                 Button_1.Background = Brushes.Transparent;
                 Button_2.Content = (helper -1).ToString();
@@ -191,6 +212,115 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 Button_5.Background = Brushes.Transparent;
             }
         }
-        
+        private void Page_minusz(object sender, RoutedEventArgs e)
+        {
+            Brush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 11, 58, 188));
+            if (actual_page-1 == 0)
+            {
+                MessageBox.Show("Az oldalszám nem lehet 0 vagy kissebb 0-nál.");
+            }
+            else
+            {
+                actual_page--;
+                products_Read(actual_page);
+                costumer_Read(actual_page);
+                if(actual_page == 1)
+                {
+                    Button_1.Content = "1";
+                    Button_1.Background = color;
+                    Button_2.Content = "2";
+                    Button_2.Background = Brushes.Transparent;
+                    Button_3.Content = "3";
+                    Button_3.Background = Brushes.Transparent;
+                    Button_4.Content = "4";
+                    Button_4.Background = Brushes.Transparent;
+                    Button_5.Content = "5";
+                    Button_5.Background = Brushes.Transparent;
+                }
+                else if (actual_page == 2)
+                {
+                    Button_1.Content = "1";
+                    Button_1.Background = Brushes.Transparent;
+                    Button_2.Content = "2";
+                    Button_2.Background = color;
+                    Button_3.Content = "3";
+                    Button_3.Background = Brushes.Transparent;
+                    Button_4.Content = "4";
+                    Button_4.Background = Brushes.Transparent;
+                    Button_5.Content = "5";
+                    Button_5.Background = Brushes.Transparent;
+                }
+                else
+                {
+                    Button_1.Content = (actual_page - 2).ToString();
+                    Button_1.Background = Brushes.Transparent;
+                    Button_2.Content = (actual_page - 1).ToString();
+                    Button_2.Background = Brushes.Transparent;
+                    Button_3.Content = actual_page.ToString();
+                    Button_3.Background = color;
+                    Button_4.Content = (actual_page + 1).ToString();
+                    Button_4.Background = Brushes.Transparent;
+                    Button_5.Content = (actual_page + 2).ToString();
+                    Button_5.Background = Brushes.Transparent;
+                }
+            }
+        }
+        private void Page_plusz(object sender, RoutedEventArgs e)
+        {
+            Brush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 11, 58, 188));
+            actual_page++;
+            products_Read(actual_page);
+            costumer_Read(actual_page);
+            if (actual_page == 1)
+            {
+                Button_1.Content = "1";
+                Button_1.Background = color;
+                Button_2.Content = "2";
+                Button_2.Background = Brushes.Transparent;
+                Button_3.Content = "3";
+                Button_3.Background = Brushes.Transparent;
+                Button_4.Content = "4";
+                Button_4.Background = Brushes.Transparent;
+                Button_5.Content = "5";
+                Button_5.Background = Brushes.Transparent;
+            }
+            else if (actual_page == 2)
+            {
+                Button_1.Content = "1";
+                Button_1.Background = Brushes.Transparent;
+                Button_2.Content = "2";
+                Button_2.Background = color;
+                Button_3.Content = "3";
+                Button_3.Background = Brushes.Transparent;
+                Button_4.Content = "4";
+                Button_4.Background = Brushes.Transparent;
+                Button_5.Content = "5";
+                Button_5.Background = Brushes.Transparent;
+            }
+            else
+            {
+                Button_1.Content = (actual_page - 2).ToString();
+                Button_1.Background = Brushes.Transparent;
+                Button_2.Content = (actual_page - 1).ToString();
+                Button_2.Background = Brushes.Transparent;
+                Button_3.Content = actual_page.ToString();
+                Button_3.Background = color;
+                Button_4.Content = (actual_page + 1).ToString();
+                Button_4.Background = Brushes.Transparent;
+                Button_5.Content = (actual_page + 2).ToString();
+                Button_5.Background = Brushes.Transparent;
+            }
+        }
+        //-------------------------------------------------------------
+        //Táblázat elemek Törlése és modositása
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Modify(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
