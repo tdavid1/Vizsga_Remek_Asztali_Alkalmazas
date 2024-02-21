@@ -12,5 +12,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         public string Name { get; set; }
         public string Email { get; set; }
         public string Privilage { get; set; }
+        public string Password { get; set; }
     }
 }

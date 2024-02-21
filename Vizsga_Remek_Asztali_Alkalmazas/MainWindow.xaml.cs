@@ -11,6 +11,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using Org.BouncyCastle.Asn1.X509;
+using System.Security;
+using SimpleHashing.Net;
+using System.Windows.Controls.Primitives;
 
 namespace Vizsga_Remek_Asztali_Alkalmazas
 {
@@ -23,11 +26,14 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         ProductsService productsService;
         CostumerService costumerService;
         int actual_page;
+        ISimpleHash simpleHash;
+        bool isloged= false;
         public MainWindow()
         {
             InitializeComponent();
             this.productsService = new ProductsService();
             this.costumerService = new CostumerService();
+            this.simpleHash = new SimpleHash();
             actual_page = 1;
             counter.Text = productsService.GetAll().Count + " Termék Van";
             products_Read(actual_page);
@@ -63,10 +69,9 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         }
         //-------------------------------------------------------------
         //Oldalsávok közti mozgás és elrejtése
-        private bool Logged = false;
         private void main_page(object sender, RoutedEventArgs e)
         {
-            if (!Logged)
+            if (!isloged)
             {
                 MessageBox.Show("Be kell jelentkezni");
             }
@@ -78,7 +83,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         }
         private void login(object sender, RoutedEventArgs e)
         {
-            if (!Logged)
+            if (!isloged)
             {
                 Main_page.Visibility = Visibility.Collapsed;
                 Login_page.Visibility = Visibility.Visible;
@@ -111,7 +116,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             counter.Text=productsService.GetAll().Count+" Termék Van";
             title.Text = "Termékek";
         }
-
         private void move_costumer_table(object sender, RoutedEventArgs e)
         {
             Brush color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 11, 58, 188));
@@ -315,12 +319,59 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         //Táblázat elemek Törlése és modositása
         private void Delete(object sender, RoutedEventArgs e)
         {
-
+            Button button = (sender as Button);
+            
+            foreach (var item in produtcTable.ItemsSource)
+            {
+                MessageBox.Show(item.ToString());
+            }
         }
-
         private void Modify(object sender, RoutedEventArgs e)
         {
 
+        }
+        //------------------------------------------------------------
+        //Bejelentkezés/Logout
+        private void Login_Button(object sender, RoutedEventArgs e)
+        {
+            string username = user_name.Text;
+            string jelszo = password.Password.ToString();
+            List<Costumer> user = costumerService.GetAll();
+            foreach (var item in user)
+            {
+                bool isValidPassword = simpleHash.Verify(jelszo, item.Password);
+                if (username == item.Name && isValidPassword && item.Privilage == "Admin")
+                {
+                    isloged= true;
+                    Login_page.Visibility = Visibility.Collapsed;
+                    Main_page.Visibility = Visibility.Visible;
+                    user_name.Text = "";
+                    password.Password = "";
+                }
+            }
+            if (!isloged)
+            {
+                MessageBox.Show("Nem sikerült a bejelentkezés");
+            }
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            if (isloged)
+            {
+                MessageBoxResult selectedButton =
+                MessageBox.Show($"Biztos ki szeretne jelentkezni?",
+                    "Biztos?", MessageBoxButton.YesNo);
+                if (selectedButton == MessageBoxResult.Yes)
+                {
+                    Login_page.Visibility = Visibility.Visible;
+                    Main_page.Visibility = Visibility.Collapsed;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Előbb be kell jelentkezni hogy ki tudjon jelentkezni");
+            }
         }
     }
 }

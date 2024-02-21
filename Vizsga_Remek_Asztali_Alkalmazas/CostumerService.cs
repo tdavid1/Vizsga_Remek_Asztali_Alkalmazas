@@ -36,6 +36,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     costumer.Id_Costumer = reader.GetInt32("user_id");
                     costumer.Name = reader.GetString("username");
                     costumer.Email = reader.GetString("email");
+                    costumer.Password = reader.GetString("password");
                     if (reader.GetInt32("Privilages_priv_id") == 20)
                     {
                         costumer.Privilage = "User";
