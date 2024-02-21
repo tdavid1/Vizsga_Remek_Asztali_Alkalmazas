@@ -28,6 +28,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         int actual_page;
         ISimpleHash simpleHash;
         bool isloged= false;
+        bool isprod = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -142,6 +143,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
             }
             produtcTable.ItemsSource = completlist;
+            isprod = true;
         }
         private void costumer_Read(int page_number)
         {
@@ -157,6 +159,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
             }
             costumerTable.ItemsSource = completlist;
+            isprod = false;
         }
         //---------------------------------------------------------------
         //Alsó sáv gombok
@@ -377,10 +380,44 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         {
             MessageBox.Show(Search.Text);
         }
-
         private void Seartch_byid(object sender, RoutedEventArgs e)
         {
-
+            if(isprod==true && Search_list.Text == "")
+            {
+                products_Read(actual_page);
+            }
+            else if(isprod == false && Search_list.Text == "")
+            {
+                costumer_Read(actual_page);
+            }
+            else if(isprod == true)
+            {
+                List<Products> all = new List<Products>();
+                string name = Search_list.Text;
+                List<Products> list_p = productsService.GetAll();
+                foreach (Products p in list_p)
+                {
+                    if (p.Products_name.Contains(name))
+                    {
+                        all.Add(p);
+                    }
+                }
+                produtcTable.ItemsSource = all;
+            }
+            else if(isprod== false)
+            {
+                List<Costumer> all = new List<Costumer>();
+                string name = Search_list.Text;
+                List<Costumer> list_c = costumerService.GetAll();
+                foreach (Costumer c in list_c)
+                {
+                    if (c.Name.Contains(name))
+                    {
+                        all.Add(c);
+                    }
+                }
+                costumerTable.ItemsSource = all;
+            }
         }
     }
 }
