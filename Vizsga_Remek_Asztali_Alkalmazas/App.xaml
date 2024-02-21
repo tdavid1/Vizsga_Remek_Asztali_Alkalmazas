@@ -66,10 +66,10 @@
             <Setter Property="Foreground" Value="#b0b9c6"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Padding" Value="15 10"/>
+            <Setter Property="Padding" Value="10 5"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0 10"/>
-            <Setter Property="Template">
+            <!--<Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBoxBase">
                         <Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="#e0e6ed" CornerRadius="20">
@@ -85,7 +85,7 @@
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
         </Style>
 
         <Style x:Key="addButton" TargetType="Button">
@@ -220,7 +220,7 @@
 
         <Style x:Key="textboxSeartchtermek" TargetType="TextBox" BasedOn="{StaticResource textboxSeartch}">
             <Setter Property="Padding" Value="10 7"/>
-            <Setter Property="Template">
+            <!--<Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBoxBase">
                         <Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="#e0e6ed" CornerRadius="7">
@@ -236,7 +236,7 @@
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
         </Style>
 
         <Style x:Key="{ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}" TargetType="{x:Type Button}">

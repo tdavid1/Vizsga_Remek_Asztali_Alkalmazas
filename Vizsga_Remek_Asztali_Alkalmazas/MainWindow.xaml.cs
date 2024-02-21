@@ -354,7 +354,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 MessageBox.Show("Nem sikerült a bejelentkezés");
             }
         }
-
         private void logout(object sender, RoutedEventArgs e)
         {
             if (isloged)
@@ -372,6 +371,16 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             {
                 MessageBox.Show("Előbb be kell jelentkezni hogy ki tudjon jelentkezni");
             }
+        }
+        //-----------------------------------------------------------
+        private void Seartch_byname(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(Search.Text);
+        }
+
+        private void Seartch_byid(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -62,7 +62,7 @@
                 </Border>
             </Grid>
             <!--Bejelentkezés-->
-            <Grid Grid.Column="1" Visibility="Visible" x:Name="Login_page">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="Login_page">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -90,7 +90,7 @@
                 </Button>
             </Grid>
             <!--Fő Tábla-->
-            <Grid Grid.Column="1" Margin="30 20 20 20" Visibility="Collapsed" x:Name="Main_page">
+            <Grid Grid.Column="1" Margin="30 20 20 20" Visibility="Visible" x:Name="Main_page">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -102,9 +102,12 @@
                 </Grid.RowDefinitions>
                 <!--Kereső-->
                 <Grid Width="300" HorizontalAlignment="Left">
-                    <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Keresés" />
+                    <!--<TextBlock Margin="20 0" VerticalAlignment="Center" Background="Transparent" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Keresés" />-->
                     <TextBox x:Name="Search" Style="{StaticResource textboxSeartch}" Height="30"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
+                    <!--<Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />-->
+                    <Button Click="Seartch_byname" Height="20" Width="20" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right">
+                        <Icon:PackIconMaterial Kind="Magnify"/>
+                    </Button>
                 </Grid>
                 <!--Beálitás-->
                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
@@ -129,9 +132,12 @@
                 <TextBlock x:Name="counter" Text="- Termék van" Grid.Row="4" FontSize="19" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Text="Keresés a listába" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Foreground="#121518" Margin="0 0 215 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                    <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Kereset Termék" />
+                    <!--<TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" Panel.ZIndex="1" Visibility="{Binding ElementName=Search,Path=Text.isEmpty,Converter={StaticResource BoolToVis}}" Text="Kereset Termék" />-->
                     <TextBox x:Name="Search_list" Style="{StaticResource textboxSeartchtermek}" Height="30"/>
-                    <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />
+                    <!--<Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right" />-->
+                    <Button Click="Seartch_byid" Height="20" Width="20" BorderBrush="Transparent" Background="Transparent" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right">
+                        <Icon:PackIconMaterial Kind="Magnify"/>
+                    </Button>
                 </Grid>
                 <!--Termék Táblázat-->
                 <DataGrid Visibility="Visible" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="produtcTable">
