@@ -116,7 +116,7 @@
                 <!--Oldal Cím-->
                 <TextBlock x:Name="title" Text="Termékek" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518"/>
                 <!--Hozzáadás Gomb-->
-                <Button Style="{StaticResource addButton}">
+                <Button Style="{StaticResource addButton}" Click="add_button">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
                         <TextBlock Text="Új Termék Felvétele"/>
@@ -146,6 +146,7 @@
                         <DataGridTextColumn Header="Termék" IsReadOnly="True" Width="*" Binding="{Binding Products_name}"/>
                         <DataGridTextColumn Header="Ára" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
                         <DataGridTextColumn Header="Leirása" IsReadOnly="True" Width="*" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Header="Típus" IsReadOnly="True" Width="*" Binding="{Binding Type}"/>
                         <DataGridTemplateColumn Header="Gombok" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

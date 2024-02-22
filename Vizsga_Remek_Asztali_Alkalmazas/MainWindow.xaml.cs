@@ -23,7 +23,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     public partial class MainWindow : Window
     {
         
-        ProductsService productsService;
+        public ProductsService productsService;
         CostumerService costumerService;
         int actual_page;
         ISimpleHash simpleHash;
@@ -129,7 +129,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         }
         //-------------------------------------------------------------
         //Táblák Feltöltése
-        private void products_Read(int page_number)
+        public void products_Read(int page_number)
         {
             List<Products> list = productsService.GetAll();
             List<Products> completlist = new List<Products>();
@@ -376,6 +376,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             }
         }
         //-----------------------------------------------------------
+        //Keresés
         private void Seartch_byname(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(Search.Text);
@@ -418,6 +419,17 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                 }
                 costumerTable.ItemsSource = all;
             }
+        }
+        //-----------------------------------------------------------------
+        //Termék Hozzáaddása
+        private void add_button(object sender, RoutedEventArgs e)
+        {
+            ProductsForm form = new ProductsForm(productsService);
+            form.Closed += (_, _) =>
+            {
+                products_Read(actual_page);
+            };
+            form.ShowDialog();
         }
     }
 }

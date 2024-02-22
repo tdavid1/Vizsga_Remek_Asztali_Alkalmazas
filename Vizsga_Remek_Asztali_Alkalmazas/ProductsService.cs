@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace Vizsga_Remek_Asztali_Alkalmazas
 {
-    class ProductsService
+    public class ProductsService
     {
         MySqlConnection connection;
         public ProductsService()
@@ -40,12 +40,31 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     product.Id = reader.GetInt32("product_id");
                     product.Products_name = reader.GetString("product_name");
                     product.Price = reader.GetInt32("price");
-                    product.Description = reader.GetString("descreption");
+                    product.Description = reader.GetString("description");
+                    product.Type = reader.GetString("product_type");
                     products.Add(product);
                 }
             }
             CloseConnection();
             return products;
+        }
+        public bool Create(Products product)
+        {
+            OpenConnection();
+            string sql = "INSERT INTO product(product_name,price,description,product_pic,product_spectype,product_type) VALUES (@product_name,@price,@descreption,@product_pic,@spectype,@type)";
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@product_name", product.Products_name);
+            command.Parameters.AddWithValue("@price", product.Price);
+            command.Parameters.AddWithValue("@descreption",product.Description);
+            command.Parameters.AddWithValue("@product_pic", product.Picture);
+            command.Parameters.AddWithValue("@spectype", product.SpecType);
+            command.Parameters.AddWithValue("@type", product.Type);
+
+            int affectedRows = command.ExecuteNonQuery();
+
+            CloseConnection();
+            return affectedRows == 1;
         }
         private void CloseConnection()
         {
