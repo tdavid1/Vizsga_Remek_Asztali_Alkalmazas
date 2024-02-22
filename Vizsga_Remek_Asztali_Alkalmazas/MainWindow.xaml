@@ -145,7 +145,7 @@
                         <DataGridTextColumn Header="Id" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Termék" IsReadOnly="True" Width="*" Binding="{Binding Products_name}"/>
                         <DataGridTextColumn Header="Ára" IsReadOnly="True" Width="*" Binding="{Binding Price}"/>
-                        <DataGridTextColumn Header="Leirása" IsReadOnly="True" Width="*" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Header="Leirása" IsReadOnly="True" Width="2*" Binding="{Binding Description}"/>
                         <DataGridTextColumn Header="Típus" IsReadOnly="True" Width="*" Binding="{Binding Type}"/>
                         <DataGridTemplateColumn Header="Gombok" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
@@ -154,7 +154,7 @@
                                         <Button Style="{StaticResource tableeditButton}" Click="Modify">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource tableButtonIcon}"/>
                                         </Button>
-                                        <Button Style="{StaticResource tabledeleteButton}" Margin="5 0 0 0" Click="Delete">
+                                        <Button Style="{StaticResource tabledeleteButton}" Margin="5 0 0 0" Tag="{Binding Id}" Click="Delete">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource tableButtonIcon}"/>
                                         </Button>
                                     </StackPanel>

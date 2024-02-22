@@ -66,6 +66,17 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             CloseConnection();
             return affectedRows == 1;
         }
+        public bool Delete(int id)
+        {
+            OpenConnection();
+            string sql = "DELETE FROM product WHERE product_id = @id";
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@id", id);
+            int affectedRows = command.ExecuteNonQuery();
+            CloseConnection();
+            return affectedRows == 1;
+        }
         private void CloseConnection()
         {
             if (connection.State == System.Data.ConnectionState.Open)

@@ -325,10 +325,27 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         private void Delete(object sender, RoutedEventArgs e)
         {
             Button button = (sender as Button);
-            
-            foreach (var item in produtcTable.ItemsSource)
+            List<Products> list = productsService.GetAll();
+            foreach (var item in list)
             {
-                MessageBox.Show(item.ToString());
+                if (button.Tag.ToString() == item.Id.ToString())
+                {
+                    MessageBoxResult selectedButton =
+                MessageBox.Show($"Biztos, hogy törölni szeretné ezt a terméket: {item.Products_name}?",
+                    "Biztos?", MessageBoxButton.YesNo);
+                    if (selectedButton == MessageBoxResult.Yes)
+                    {
+                        if (productsService.Delete(item.Id))
+                        {
+                            MessageBox.Show("Sikeres törlés!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Hiba történt a törlés során, a megadott elem nem található");
+                        }
+                        products_Read(actual_page);
+                    }
+                }
             }
         }
         private void Modify(object sender, RoutedEventArgs e)

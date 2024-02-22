@@ -69,6 +69,10 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             {
                 throw new Exception("Típus megadása kötelező");
             }
+            if (string.IsNullOrEmpty(spectype))
+            {
+                throw new Exception("Specifikus Típus megadása kötelező");
+            }
             if (string.IsNullOrEmpty(priceText))
             {
                 throw new Exception("Ár megadása kötelező");
