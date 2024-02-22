@@ -116,6 +116,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             costumerTable.Visibility = Visibility.Collapsed;
             counter.Text=productsService.GetAll().Count+" Termék Van";
             title.Text = "Termékek";
+            isprod = true;
         }
         private void move_costumer_table(object sender, RoutedEventArgs e)
         {
@@ -126,6 +127,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             costumerTable.Visibility = Visibility.Visible;
             counter.Text = costumerService.GetAll().Count + " Felhasználó Van";
             title.Text = "Felhasználók";
+            isprod = false;
         }
         //-------------------------------------------------------------
         //Táblák Feltöltése
@@ -133,33 +135,33 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         {
             List<Products> list = productsService.GetAll();
             List<Products> completlist = new List<Products>();
-            int number = page_number * 10;
+            int number = page_number * 8;
             int i = 1;
             foreach (Products product in list)
             {
-                if (i > number - 10)
+                if (i > number - 8 && i<number+1)
                 {
                     completlist.Add(product);
                 }
+                i++;
             }
             produtcTable.ItemsSource = completlist;
-            isprod = true;
         }
         private void costumer_Read(int page_number)
         {
             List<Costumer> list = costumerService.GetAll();
             List<Costumer> completlist = new List<Costumer>();
-            int number = page_number * 10;
+            int number = page_number * 8;
             int i = 1;
             foreach (Costumer costumer in list)
             {
-                if (i > number - 10)
+                if (i > number - 8 && i < number + 1)
                 {
                     completlist.Add(costumer);
                 }
+                i++;
             }
             costumerTable.ItemsSource = completlist;
-            isprod = false;
         }
         //---------------------------------------------------------------
         //Alsó sáv gombok
