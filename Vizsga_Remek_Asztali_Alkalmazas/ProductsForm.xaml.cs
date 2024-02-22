@@ -20,10 +20,25 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
     public partial class ProductsForm : Window
     {
         private ProductsService productsService;
+        private Products productTo;
         public ProductsForm(ProductsService productsService)
         {
             InitializeComponent();
             this.productsService = productsService;
+        }
+        public ProductsForm(ProductsService productsService, Products productToU)
+        {
+            InitializeComponent();
+            this.productTo = productToU;
+            this.productsService = productsService;
+            text_cim.Text = "Termék modositása";
+            add_btn.Visibility = System.Windows.Visibility.Collapsed;
+            mod_btn.Visibility = System.Windows.Visibility.Visible;
+            add_name.Text = productTo.Products_name;
+            add_price.Text = productTo.Price.ToString();
+            add_desc.Text = productTo.Description;
+            add_spectype.Text = productTo.SpecType;
+            add_type.Text = productTo.Type;
         }
 
         private void add_products(object sender, RoutedEventArgs e)
@@ -37,7 +52,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     add_name.Text = "";
                     add_price.Text = "";
                     add_desc.Text = "";
-                    add_pic.Text = "";
                     add_spectype.Text = "";
                     add_type.Text = "";
                 }
@@ -57,7 +71,6 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             string name = add_name.Text.Trim();
             string priceText = add_price.Text.Trim();
             string desc = add_desc.Text.Trim();
-            string pic = add_pic.Text.Trim();
             string spectype = add_spectype.Text.Trim();
             string type = add_type.Text.Trim();
 
@@ -93,10 +106,31 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             products.Products_name = name;
             products.Price = price;
             products.Description = desc;
-            products.Picture = pic;
             products.SpecType = spectype;
             products.Type = type;
             return products;
+        }
+
+        private void modify(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Products product = CreateProducts();
+                MessageBox.Show((productsService.Update(productTo.Id, product)).ToString());
+                if (productsService.Update(productTo.Id, product))
+                {
+                    MessageBox.Show("Sikeres módosítás");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Hiba történt a módosítás során! Javasoljuk az ablak bezárását!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

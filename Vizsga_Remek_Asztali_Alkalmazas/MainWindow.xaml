@@ -45,7 +45,7 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Click="login">
+                            <Button Style="{StaticResource menuButton}" x:Name="login_btn" Click="login">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Login" Style="{StaticResource menuIcon}"/>
                                     <TextBlock Text="Bejelentkezés"/>
@@ -151,7 +151,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource tableeditButton}" Click="Modify">
+                                        <Button Style="{StaticResource tableeditButton}" Click="Modify" Tag="{Binding Id}">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource tableButtonIcon}"/>
                                         </Button>
                                         <Button Style="{StaticResource tabledeleteButton}" Margin="5 0 0 0" Tag="{Binding Id}" Click="Delete">

@@ -16,27 +16,25 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.ColumnSpan="2" Text="Termék Hozzáadása" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Click="add_products" Grid.ColumnSpan="2" Grid.Row="7" Margin="0" HorizontalAlignment="Center" Style="{StaticResource addButton}" Content="Termék Hozzáadása"/>
+            <TextBlock x:Name="text_cim" Grid.ColumnSpan="2" Text="Termék Hozzáadása" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="add_btn" Click="add_products" Grid.ColumnSpan="2" Grid.Row="6" Margin="0" HorizontalAlignment="Center" Style="{StaticResource addButton}" Content="Termék Hozzáadása"/>
+            <Button x:Name="mod_btn" Click="modify" Visibility="Collapsed" Grid.ColumnSpan="2" Grid.Row="6" Margin="0" HorizontalAlignment="Center" Style="{StaticResource addButton}" Content="Termék Modositása"/>
             <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" x:Name="add_name" Width="140"/>
             <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" x:Name="add_price" Width="140"/>
             <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" x:Name="add_desc" Width="140"/>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" x:Name="add_pic" Width="140"/>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" TextWrapping="Wrap" x:Name="add_spectype" Width="140"/>
-            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" TextWrapping="Wrap" x:Name="add_type" Width="140"/>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" x:Name="add_spectype" Width="140"/>
+            <TextBox VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" TextWrapping="Wrap" x:Name="add_type" Width="140"/>
             
             <Label Grid.Row="1" Content="Termék neve:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
             <Label Grid.Row="2" Content="Termék Ára:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
             <Label Grid.Row="3" Content="Termék Leírása:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
-            <Label Grid.Row="4" Content="Termék Kép Link:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
-            <Label Grid.Row="5" Content="Specifikus Típus:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
-            <Label Grid.Row="6" Content="Típus:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+            <Label Grid.Row="4" Content="Specifikus Típus:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+            <Label Grid.Row="5" Content="Típus:" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
         </Grid>
     </Border>
 </Window>

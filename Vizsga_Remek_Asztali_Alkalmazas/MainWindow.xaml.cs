@@ -36,10 +36,21 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             this.costumerService = new CostumerService();
             this.simpleHash = new SimpleHash();
             actual_page = 1;
-            counter.Text = productsService.GetAll().Count + " Termék Van";
+            productcounter();
             products_Read(actual_page);
             costumer_Read(actual_page);
         }
+        //----------------------------------------------------------------
+        //Számlálok
+        private void productcounter()
+        {
+            counter.Text = productsService.GetAll().Count + " Termék Van";
+        }
+        private void costumercounter()
+        {
+            counter.Text = costumerService.GetAll().Count + " Felhasználo van";
+        }
+        //-------------------------------------------------------------------
         //Oldal nagyitása és kicsinyitése
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -114,7 +125,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             costumer_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Visible;
             costumerTable.Visibility = Visibility.Collapsed;
-            counter.Text=productsService.GetAll().Count+" Termék Van";
+            productcounter();
             title.Text = "Termékek";
             isprod = true;
             actual_page = 1;
@@ -137,10 +148,10 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             products_button.BorderBrush = Brushes.Transparent;
             produtcTable.Visibility = Visibility.Collapsed;
             costumerTable.Visibility = Visibility.Visible;
-            counter.Text = costumerService.GetAll().Count + " Felhasználó Van";
             title.Text = "Felhasználók";
             isprod = false;
             actual_page = 1;
+            costumercounter();
             costumer_Read(actual_page);
             Button_1.Content = "1";
             Button_1.Background = color;
@@ -400,6 +411,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                         if (productsService.Delete(item.Id))
                         {
                             MessageBox.Show("Sikeres törlés!");
+                            productcounter();
                         }
                         else
                         {
@@ -433,6 +445,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                             if (costumerService.Delete(item.Id_Costumer))
                             {
                                 MessageBox.Show("Sikeres törlés!");
+                                costumercounter();
                             }
                             else
                             {
@@ -446,7 +459,20 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         }
         private void Modify(object sender, RoutedEventArgs e)
         {
-
+            Button button = (sender as Button);
+            List<Products> list = productsService.GetAll();
+            foreach (var item in list)
+            {
+                if (button.Tag.ToString() == item.Id.ToString())
+                {
+                    ProductsForm form = new ProductsForm(productsService,item);
+                    form.Closed += (_, _) =>
+                    {
+                        products_Read(actual_page);
+                    };
+                    form.ShowDialog();
+                }
+            }
         }
         //------------------------------------------------------------
         //Bejelentkezés/Logout
@@ -466,6 +492,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     user_name.Text = "";
                     password.Password = "";
                 }
+                login_btn.Visibility = Visibility.Collapsed;
             }
             if (!isloged)
             {
@@ -484,6 +511,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     Login_page.Visibility = Visibility.Visible;
                     Main_page.Visibility = Visibility.Collapsed;
                 }
+                login_btn.Visibility = Visibility.Visible;
             }
             else
             {
@@ -543,6 +571,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             form.Closed += (_, _) =>
             {
                 products_Read(actual_page);
+                productcounter();
             };
             form.ShowDialog();
         }

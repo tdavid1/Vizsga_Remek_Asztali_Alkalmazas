@@ -41,6 +41,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     product.Products_name = reader.GetString("product_name");
                     product.Price = reader.GetInt32("price");
                     product.Description = reader.GetString("description");
+                    product.SpecType = reader.GetString("product_spectype");
                     product.Type = reader.GetString("product_type");
                     products.Add(product);
                 }
@@ -51,13 +52,12 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
         public bool Create(Products product)
         {
             OpenConnection();
-            string sql = "INSERT INTO product(product_name,price,description,product_pic,product_spectype,product_type) VALUES (@product_name,@price,@descreption,@product_pic,@spectype,@type)";
+            string sql = "INSERT INTO product(product_name,price,description,product_spectype,product_type) VALUES (@product_name,@price,@descreption,@spectype,@type)";
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = sql;
             command.Parameters.AddWithValue("@product_name", product.Products_name);
             command.Parameters.AddWithValue("@price", product.Price);
             command.Parameters.AddWithValue("@descreption",product.Description);
-            command.Parameters.AddWithValue("@product_pic", product.Picture);
             command.Parameters.AddWithValue("@spectype", product.SpecType);
             command.Parameters.AddWithValue("@type", product.Type);
 
@@ -72,6 +72,28 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             string sql = "DELETE FROM product WHERE product_id = @id";
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = sql;
+            command.Parameters.AddWithValue("@id", id);
+            int affectedRows = command.ExecuteNonQuery();
+            CloseConnection();
+            return affectedRows == 1;
+        }
+        public bool Update(int id, Products product)
+        {
+            OpenConnection();
+            string sql = @"UPDATE product 
+                            SET product_name = @name, 
+                                price = @price, 
+                                description = @description, 
+                                product_spectype = @spectype,
+                                product_type = @type
+                            WHERE product_id = @id";
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@name", product.Products_name);
+            command.Parameters.AddWithValue("@price", product.Price);
+            command.Parameters.AddWithValue("@description", product.Description);
+            command.Parameters.AddWithValue("@spectype", product.SpecType);
+            command.Parameters.AddWithValue("@type", product.Type);
             command.Parameters.AddWithValue("@id", id);
             int affectedRows = command.ExecuteNonQuery();
             CloseConnection();
