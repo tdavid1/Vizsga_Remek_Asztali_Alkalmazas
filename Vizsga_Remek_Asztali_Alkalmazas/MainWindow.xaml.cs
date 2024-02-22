@@ -416,6 +416,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             List<Costumer> list = costumerService.GetAll();
             foreach (var item in list)
             {
+                MessageBox.Show((button.Tag.ToString() == item.Id_Costumer.ToString()).ToString());
                 if (button.Tag.ToString() == item.Id_Costumer.ToString())
                 {
                     if (item.Privilage == "Admin")

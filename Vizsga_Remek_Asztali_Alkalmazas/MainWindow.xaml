@@ -174,7 +174,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource tabledeleteButton}" Tag="{Binding Id_Costumer}" Margin="5 0 0 0">
+                                        <Button Style="{StaticResource tabledeleteButton}" Tag="{Binding Id_Costumer}" Click="Delete_cost" Margin="5 0 0 0">
                                             <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource tableButtonIcon}"/>
                                         </Button>
                                     </StackPanel>
