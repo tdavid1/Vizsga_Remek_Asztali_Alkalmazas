@@ -59,7 +59,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                     this.Height = 720;
                     this.Width = 1080;
 
-                    Maximum = false;
+                    Maximum = false;           
                 }
                 else
                 {
@@ -117,6 +117,18 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             counter.Text=productsService.GetAll().Count+" Termék Van";
             title.Text = "Termékek";
             isprod = true;
+            actual_page = 1;
+            products_Read(actual_page);
+            Button_1.Content = "1";
+            Button_1.Background = color;
+            Button_2.Content = "2";
+            Button_2.Background = Brushes.Transparent;
+            Button_3.Content = "3";
+            Button_3.Background = Brushes.Transparent;
+            Button_4.Content = "4";
+            Button_4.Background = Brushes.Transparent;
+            Button_5.Content = "5";
+            Button_5.Background = Brushes.Transparent;
         }
         private void move_costumer_table(object sender, RoutedEventArgs e)
         {
@@ -128,40 +140,90 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             counter.Text = costumerService.GetAll().Count + " Felhasználó Van";
             title.Text = "Felhasználók";
             isprod = false;
+            actual_page = 1;
+            costumer_Read(actual_page);
+            Button_1.Content = "1";
+            Button_1.Background = color;
+            Button_2.Content = "2";
+            Button_2.Background = Brushes.Transparent;
+            Button_3.Content = "3";
+            Button_3.Background = Brushes.Transparent;
+            Button_4.Content = "4";
+            Button_4.Background = Brushes.Transparent;
+            Button_5.Content = "5";
+            Button_5.Background = Brushes.Transparent;
         }
         //-------------------------------------------------------------
         //Táblák Feltöltése
         public void products_Read(int page_number)
         {
-            List<Products> list = productsService.GetAll();
-            List<Products> completlist = new List<Products>();
-            int number = page_number * 8;
-            int i = 1;
-            foreach (Products product in list)
+            if (Maximum)
             {
-                if (i > number - 8 && i<number+1)
-                {
-                    completlist.Add(product);
-                }
-                i++;
+                //List<Products> list = productsService.GetAll();
+                //List<Products> completlist = new List<Products>();
+                //int number = page_number * 20;
+                //int i = 1;
+                //foreach (Products product in list)
+                //{
+                //    if (i > number - 20 && i < number + 1)
+                //    {
+                //        completlist.Add(product);
+                //    }
+                //    i++;
+                //}
+                //produtcTable.ItemsSource = completlist;
             }
-            produtcTable.ItemsSource = completlist;
+            else
+            {
+                List<Products> list = productsService.GetAll();
+                List<Products> completlist = new List<Products>();
+                int number = page_number * 8;
+                int i = 1;
+                foreach (Products product in list)
+                {
+                    if (i > number - 8 && i < number + 1)
+                    {
+                        completlist.Add(product);
+                    }
+                    i++;
+                }
+                produtcTable.ItemsSource = completlist;
+            }
         }
         private void costumer_Read(int page_number)
         {
-            List<Costumer> list = costumerService.GetAll();
-            List<Costumer> completlist = new List<Costumer>();
-            int number = page_number * 8;
-            int i = 1;
-            foreach (Costumer costumer in list)
+            if (Maximum)
             {
-                if (i > number - 8 && i < number + 1)
-                {
-                    completlist.Add(costumer);
-                }
-                i++;
+                //List<Costumer> list = costumerService.GetAll();
+                //List<Costumer> completlist = new List<Costumer>();
+                //int number = page_number * 20;
+                //int i = 1;
+                //foreach (Costumer costumer in list)
+                //{
+                //    if (i > number - 20 && i < number + 1)
+                //    {
+                //        completlist.Add(costumer);
+                //    }
+                //    i++;
+                //}
+                //costumerTable.ItemsSource = completlist;
             }
-            costumerTable.ItemsSource = completlist;
+            else
+            {
+                List<Costumer> list = costumerService.GetAll();
+                List<Costumer> completlist = new List<Costumer>();
+                int number = page_number * 8;
+                int i = 1;
+                foreach (Costumer costumer in list)
+                {
+                    if (i > number - 8 && i < number + 1)
+                    {
+                        completlist.Add(costumer);
+                    }
+                    i++;
+                }
+                costumerTable.ItemsSource = completlist;
+            }
         }
         //---------------------------------------------------------------
         //Alsó sáv gombok
@@ -344,6 +406,39 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
                             MessageBox.Show("Hiba történt a törlés során, a megadott elem nem található");
                         }
                         products_Read(actual_page);
+                    }
+                }
+            }
+        }
+        private void Delete_cost(object sender, RoutedEventArgs e)
+        {
+            Button button = (sender as Button);
+            List<Costumer> list = costumerService.GetAll();
+            foreach (var item in list)
+            {
+                if (button.Tag.ToString() == item.Id_Costumer.ToString())
+                {
+                    if (item.Privilage == "Admin")
+                    {
+                        MessageBox.Show("Admin fiokot nem lehet törölni");
+                    }
+                    else
+                    {
+                        MessageBoxResult selectedButton =
+                MessageBox.Show($"Biztos, hogy törölni szeretné ezt a fiokot: {item.Name}?",
+                    "Biztos?", MessageBoxButton.YesNo);
+                        if (selectedButton == MessageBoxResult.Yes)
+                        {
+                            if (costumerService.Delete(item.Id_Costumer))
+                            {
+                                MessageBox.Show("Sikeres törlés!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Hiba történt a törlés során, a megadott elem nem található");
+                            }
+                            costumer_Read(actual_page);
+                        }
                     }
                 }
             }
