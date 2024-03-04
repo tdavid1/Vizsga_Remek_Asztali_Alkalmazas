@@ -575,5 +575,18 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             };
             form.ShowDialog();
         }
+
+        private void Picture(object sender, RoutedEventArgs e)
+        {
+            Button button = (sender as Button);
+            string id = button.Tag.ToString();
+            PictureAddForm form = new PictureAddForm(id);
+            form.Closed += (_, _) =>
+            {
+                products_Read(actual_page);
+                productcounter();
+            };
+            form.ShowDialog();
+        }
     }
 }

@@ -151,6 +151,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource tableeditButton}" Margin="0,0,5,0" Click="Picture" Tag="{Binding Id}">
+                                            <Icon:PackIconMaterial Kind="PictureInPictureBottomRight" Style="{StaticResource tableButtonIcon}"/>
+                                        </Button>
                                         <Button Style="{StaticResource tableeditButton}" Click="Modify" Tag="{Binding Id}">
                                             <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource tableButtonIcon}"/>
                                         </Button>

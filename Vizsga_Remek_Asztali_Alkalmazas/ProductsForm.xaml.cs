@@ -64,6 +64,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             {
                 MessageBox.Show(ex.Message);
             }
+            this.Close();
         }
 
         private Products CreateProducts()
@@ -92,7 +93,7 @@ namespace Vizsga_Remek_Asztali_Alkalmazas
             }
             if (!int.TryParse(priceText, out int price))
             {
-                throw new Exception("Kor csak szám lehet");
+                throw new Exception("Ár csak szám lehet");
             }
             if (string.IsNullOrEmpty(desc))
             {
